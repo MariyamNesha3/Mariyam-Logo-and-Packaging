@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Logo and packaging design by Mariyam Nesha – brand identities, logo reveals and packaging.">
+  <title>Logo &amp; Packaging | Mariyam Nesha</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --orange: #F47B20;
+      --peach: #FFD3B4;
+      --peach-line: #F9B98C;
+      --panel: #F3E3D8;
+      --label: #C2611A;
+      --heading: #6B3410;
+      --dark: #161616;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #111; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; }
+
+    /* ---------- Navbar ---------- */
+    .nav-wrap { padding: 40px 70px 0; }
+    .navbar {
+      max-width: 1300px; margin: 0 auto;
+      background: var(--dark); border-radius: 50px; height: 86px;
+      padding: 0 8px 0 34px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .navbar .logo img { height: 100px; display: block; }
+    .nav-links { display: flex; list-style: none; gap: 10px; }
+    .nav-links a {
+      display: block; color: #fff; font-size: 20px;
+      padding: 18px 40px; border-radius: 40px;
+      transition: background .25s, color .25s;
+    }
+    .nav-links a:hover { color: var(--orange); }
+    .nav-links a.active { background: var(--orange); color: #fff; }
+
+    main { max-width: 1300px; margin: 0 auto; padding: 0 70px 100px; box-sizing: content-box; }
+
+    /* ---------- Title ---------- */
+    .page-title { text-align: center; font-size: 48px; font-weight: 600; margin: 76px 0 38px; letter-spacing: -0.5px; }
+    .page-title span { color: var(--orange); }
+
+    /* ---------- Info box ---------- */
+    .info { background: var(--peach); border-radius: 28px; padding: 44px 56px 50px; }
+    .info p { text-align: center; font-size: 19px; line-height: 1.6; max-width: 1050px; margin: 0 auto 36px; }
+    .info-row { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 24px; }
+    .info-box { border: 1.5px solid var(--peach-line); border-radius: 14px; padding: 14px 22px 18px; }
+    .info-box h4 { font-size: 19px; font-weight: 600; margin-bottom: 10px; }
+    .tools { display: flex; gap: 14px; }
+    .tools img { width: 50px; height: 50px; display: block; border-radius: 10px; }
+    .industries { font-size: 17px; line-height: 1.8; padding-top: 10px; }
+    .industries span { display: inline-block; }
+    .industries span:not(:last-child)::after { content: "|"; margin: 0 10px; color: #444; }
+
+    /* ---------- Brand sections ---------- */
+    .gallery { margin-top: 56px; border: 1.5px solid #ececec; border-radius: 28px; position: relative; }
+    .gallery-head {
+      position: absolute; top: -22px; left: 26px;
+      background: #fff; border: none; cursor: pointer;
+      font-size: 28px; font-weight: 500; color: #111;
+      padding: 0 14px; display: flex; align-items: center; gap: 14px;
+    }
+    .chev {
+      width: 13px; height: 13px;
+      border-left: 3px solid #111; border-top: 3px solid #111;
+      transform: rotate(45deg) translate(3px, 3px);
+      transition: transform .3s;
+    }
+    .gallery:not(.open) .chev { transform: rotate(225deg) translate(3px, 3px); }
+    .gallery-body { overflow: hidden; transition: max-height .45s ease; }
+    .gallery:not(.open) .gallery-body { max-height: 0 !important; }
+    .gallery:not(.open) { min-height: 40px; }
+
+    .brand { padding: 56px 34px 40px; display: flex; flex-direction: column; gap: 46px; }
+
+    .top-row { display: grid; grid-template-columns: 1fr 1fr 1.55fr; gap: 22px; align-items: stretch; }
+    .panel {
+      background: var(--panel); border-radius: 18px; padding: 18px 18px 14px;
+      display: flex; flex-direction: column;
+    }
+    h5 { text-align: center; color: var(--label); font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 700; margin-top: 14px; }
+
+    .media { position: relative; overflow: hidden; border-radius: 10px; background: #eadbd0; cursor: pointer; }
+    .media img,
+    .media video { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
+    .media:hover img,
+    .media:hover video { transform: scale(1.03); }
+    .media img[src=""] { display: none; }            /* hide broken-image icon + alt text until a file is added */
+    .media.fit { background: #FBF0E6; }
+    .media.fit img { object-fit: contain; padding: 8px; }
+
+    /* Logo + Logo reveal boxes: same square size, even before images load */
+    .top-row .panel > .media { aspect-ratio: 1 / 1; }
+    .media.reel { background: #2a1a12; }
+
+    .play {
+      position: absolute; top: 50%; left: 50%; z-index: 1;
+      width: 58px; height: 58px; margin: -29px 0 0 -29px;
+      background: rgba(255,255,255,.92); border-radius: 50%;
+      box-shadow: 0 4px 14px rgba(0,0,0,.25); transition: transform .25s;
+      pointer-events: none;
+    }
+    .play::after {
+      content: ""; position: absolute; top: 50%; left: 50%;
+      border-style: solid; border-width: 10px 0 10px 17px;
+      border-color: transparent transparent transparent #222;
+      transform: translate(-35%, -50%);
+    }
+    .reel:hover .play { transform: scale(1.1); }
+
+    .swatches { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: 1fr 1fr; gap: 12px; flex: 1; min-height: 160px; }
+    .swatch { border-radius: 6px; border: 1.5px solid #fff; display: block; }
+
+    /* Text */
+    .text { padding-top: 4px; }
+    h6 { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 700; color: var(--heading); margin: 18px 0 8px; }
+    h6:first-child { margin-top: 0; }
+    .text p { font-size: 16px; line-height: 1.75; color: #222; }
+    h6.font { margin: 24px 0 26px; }
+
+    /* Detail area */
+    .detail { display: grid; grid-template-columns: var(--cols); gap: 40px; align-items: start; }
+    .d-left { display: flex; flex-direction: column; gap: 26px; }
+    .d-left.narrow { max-width: 250px; margin: 0 auto; width: 100%; }
+    .media.free { background: transparent; border-radius: 0; cursor: zoom-in; }
+    .media.free img { height: auto; object-fit: contain; }
+    .media.mockup { aspect-ratio: 1.55 / 1; max-width: 520px; border-radius: 16px; }
+    .media.mockup.small { max-width: 400px; }
+    .labeled h5 { margin-top: 10px; }
+    .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+    .media.card { width: 100%; aspect-ratio: auto; border-radius: 4px; background: transparent; }
+    .media.card img { height: auto; object-fit: contain; }   /* shows the whole card, no cropping */
+
+    .refs { margin-top: -20px; }
+    .media.bottle { aspect-ratio: 0.85 / 1; border-radius: 12px; }
+    .ref-title { color: var(--label); font-size: 22px; margin: 0 0 14px; }
+    .ref-row { display: grid; grid-template-columns: 1.5fr 0.8fr 1.5fr; gap: 10px; }
+    .media.ref { aspect-ratio: 1.35 / 1; border-radius: 6px; }
+    .media.ref.narrow { aspect-ratio: 0.72 / 1; }
+
+    /* ---------- Lightbox ---------- */
+    .lightbox {
+      position: fixed; inset: 0; background: rgba(0,0,0,.85);
+      display: none; align-items: center; justify-content: center;
+      z-index: 100; padding: 30px;
+    }
+    .lightbox.show { display: flex; }
+    .lightbox img, .lightbox video { max-width: 90vw; max-height: 88vh; border-radius: 10px; display: block; }
+    .lightbox .close {
+      position: absolute; top: 20px; right: 28px;
+      background: none; border: none; color: #fff; font-size: 44px; cursor: pointer; line-height: 1;
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      background: #000; color: #fff; padding: 16px 60px;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+    }
+    footer .copy { font-size: 18px; }
+    footer .f-logo img { height: 100px; display: block; }
+    footer .social { display: flex; align-items: center; justify-content: flex-end; gap: 23px; }
+    footer .social span { font-size: 18px; font-weight: 500; margin-right: -8px; }
+    footer .social img { width: 50px; height: 50px; display: block; border-radius: 6px; transition: transform .25s; }
+    footer .social a:hover img { transform: translateY(-4px); }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 1100px) {
+      .nav-links a { padding: 14px 24px; font-size: 18px; }
+      .info-row { grid-template-columns: 1fr; }
+      .top-row { grid-template-columns: 1fr 1fr; }
+      .top-row > :nth-child(3) { grid-column: 1 / -1; }
+      .detail { grid-template-columns: 1fr !important; }
+      .d-left { max-width: 520px; margin: 0 auto; width: 100%; }
+    }
+    @media (max-width: 720px) {
+      .nav-wrap { padding: 20px 16px 0; }
+      .navbar { height: auto; padding: 14px 16px; flex-direction: column; gap: 12px; border-radius: 30px; }
+      .nav-links { flex-wrap: wrap; justify-content: center; gap: 4px; }
+      .nav-links a { padding: 10px 18px; font-size: 16px; }
+      main { padding: 0 16px 60px; }
+      .page-title { font-size: 34px; margin-top: 44px; }
+      .info { padding: 28px 20px; }
+      .info p { font-size: 16px; }
+      .gallery-head { font-size: 20px; }
+      .brand { padding: 44px 14px 24px; gap: 30px; }
+      .top-row { gap: 12px; }
+      .panel { padding: 10px 10px 8px; }
+      h5 { font-size: 15px; }
+      .play { width: 44px; height: 44px; margin: -22px 0 0 -22px; }
+      .play::after { border-width: 8px 0 8px 13px; }
+      footer { grid-template-columns: 1fr; gap: 22px; text-align: center; padding: 20px 20px; }
+      footer .f-logo img { margin: 0 auto; }
+      footer .social { justify-content: center; flex-wrap: wrap; gap: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Header / Navigation ===== -->
+  <header class="nav-wrap">
+    <nav class="navbar">
+      <a href="index.html" class="logo"><img src="Image/Common/Logo.png" alt="MN logo"></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="graphic-design.html" class="active" aria-current="page">Projects</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1 class="page-title">Logo &amp; <span>Packaging</span></h1>
+
+    <!-- ===== Intro, tools & industries ===== -->
+    <section class="info">
+      <p>I create distinctive brand identities and packaging designs that reflect a brand’s personality and values. My work includes logo design, visual identity development, packaging layouts, and product presentation, with a focus on consistency, visual appeal, and meaningful brand communication.</p>
+      <div class="info-row">
+        <div class="info-box">
+          <h4>Tools</h4>
+          <div class="tools">
+            <img src="Image/Common/Photoshop.png" alt="Photoshop">
+            <img src="Image/Common/Illustrator.png" alt="Illustrator">
+            <img src="Image/Common/Framer.png" alt="Framer">
+            <img src="Image/Common/After Effect.png" alt="After Effects">
+          </div>
+        </div>
+        <div class="info-box">
+          <h4>Industries</h4>
+          <div class="industries"><span>Fitness</span><span>Jewellery</span><span>Food And Beverage</span><span>Retail</span><span>Fashion</span><span>Travel And Tourism</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!--
+      LOGO REVEAL VIDEOS
+      Put the video path in data-video="...".
+      - Leave the <img src=""> empty: the first frame of the video is shown as the thumbnail automatically.
+      - Or set <img src="..."> to your own thumbnail image.
+      Clicking the box plays the video in the lightbox.
+    -->
+
+    <section class="gallery open">
+      <button class="gallery-head" type="button" aria-expanded="true">ZAYKA-E-DILLI <span class="chev"></span></button>
+      <div class="gallery-body">
+        <div class="brand">
+          <div class="top-row">
+            <div class="panel">
+              <div class="media zoom"><img src="Image/Packaging/Zayka-E-Dillii.png" alt="Zayka-E-Dilli logo" loading="lazy"></div>
+              <h5>Logo</h5>
+            </div>
+            <div class="panel">
+              <div class="media reel" data-video="Image/Packaging/ZAYKA-E-DILLI.mp4"><img src="Image/Packaging/1.png" alt="Zayka-E-Dilli logo reveal" loading="lazy"><span class="play"></span></div>
+              <h5>Logo reveal</h5>
+            </div>
+            <div class="panel">
+              <div class="swatches"><span class="swatch" style="background:#540534" title="#540534"></span><span class="swatch" style="background:#380023" title="#380023"></span><span class="swatch" style="background:#FCD450" title="#FCD450"></span><span class="swatch" style="background:#A42B72" title="#A42B72"></span><span class="swatch" style="background:#C9810B" title="#C9810B"></span><span class="swatch" style="background:#DFBD38" title="#DFBD38"></span></div>
+              <h5>Colors</h5>
+            </div>
+        </div>
+        <div class="detail" style="--cols: 1fr 2.1fr">
+          <div class="d-left narrow"><div class="media zoom free"><img src="Image/Packaging/Packaging.png" alt="Zayka-E-Dilli packaging" loading="lazy"></div></div>
+          <div class="text">
+            <h6>Brand Story</h6>
+            <p>Inspired by the iconic flavours of Delhi, Zayka-E-Dilli brings the city's culinary heritage to life through its visual identity. The logo draws inspiration from Mughal architecture, while the deep burgundy and golden colour palette reflects richness, warmth, and authenticity. Ornamental patterns and architectural illustrations further reinforce the brand’s cultural roots, creating a distinctive identity across food packaging and promotional materials.</p>
+            <h6>Brand Type</h6>
+            <p>Food &amp; Beverage | Indian Cuisine | Food Delivery &amp; Takeaway</p>
+            <h6>Design Approach</h6>
+            <p>The visual system combines heritage-inspired design elements with modern food packaging. From the architectural logo and decorative patterns to the takeaway packaging, every element is designed to create a cohesive brand experience that communicates tradition, flavour, and quality.</p>
+            <h6 class="font">Font: EB Garamond, Montserrat</h6>
+            <div class="media zoom mockup"><img src="Image/Packaging/Zayka-E-Dillii Biryani Packaging 1.png" alt="Zayka-E-Dilli packaging mockup" loading="lazy"></div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery open">
+      <button class="gallery-head" type="button" aria-expanded="true">RUHI JEWELS <span class="chev"></span></button>
+      <div class="gallery-body">
+        <div class="brand">
+          <div class="top-row">
+            <div class="panel">
+              <div class="media zoom"><img src="Image/Packaging/Frame 1261157347.png" alt="Ruhi Jewels logo" loading="lazy"></div>
+              <h5>Logo</h5>
+            </div>
+            <div class="panel">
+              <div class="media reel" data-video="Image/Packaging/Ruhi_jewels.mp4"><img src="Image/Packaging/2.png" alt="Ruhi Jewels logo reveal" loading="lazy"><span class="play"></span></div>
+              <h5>Logo reveal</h5>
+            </div>
+            <div class="panel">
+              <div class="swatches"><span class="swatch" style="background:#6D123E" title="#6D123E"></span><span class="swatch" style="background:#33102E" title="#33102E"></span><span class="swatch" style="background:#FCD1D8" title="#FCD1D8"></span><span class="swatch" style="background:#F4ADBD" title="#F4ADBD"></span><span class="swatch" style="background:#AD802B" title="#AD802B"></span><span class="swatch" style="background:#E8CB63" title="#E8CB63"></span></div>
+              <h5>Colors</h5>
+            </div>
+        </div>
+        <div class="detail" style="--cols: 1fr 1.25fr">
+          <div class="d-left">
+            <div class="labeled">
+              <div class="media zoom free"><img src="Image/Packaging/RuhiJewels 1.png" alt="Ruhi Jewels packaging" loading="lazy"></div>
+              <h5>Packaging</h5>
+            </div>
+            <div class="labeled">
+              <div class="pair">
+                <div class="media zoom card"><img src="Image/Packaging/Frame 27 1.png" alt="Thank you card front" loading="lazy"></div>
+                <div class="media zoom card"><img src="Image/Packaging/Frame 26 1.png" alt="Thank you card back" loading="lazy"></div>
+              </div>
+              <h5>Thank you Card</h5>
+            </div>
+            <div class="labeled">
+              <div class="pair">
+                <div class="media zoom card"><img src="Image/Packaging/Screenshot 2026-10-16 053452 1.png" alt="Visiting card front" loading="lazy"></div>
+                <div class="media zoom card"><img src="Image/Packaging/Screenshot 2026-10-16 053441 1.png" alt="Visiting card back" loading="lazy"></div>
+              </div>
+              <h5>Visiting Card</h5>
+            </div>
+          </div>
+          <div class="text">
+            <h6>Brand Story</h6>
+            <p>Inspired by the timeless beauty of jewellery, Ruhi Jewels embraces a soft, elegant visual language that reflects grace and sophistication. The logo combines a distinctive monogram with a diamond symbol, while the blush pink, burgundy, and gold palette adds warmth and a premium feel. Subtle botanical illustrations and marble-inspired textures bring a delicate touch to the packaging, creating a cohesive identity across jewellery boxes, thank-you cards, and customer communication materials.</p>
+            <h6>Brand Type</h6>
+            <p>Jewellery | Fashion Accessories | E-commerce</p>
+            <h6>Design Approach</h6>
+            <p>The design system balances understated luxury with a contemporary aesthetic. From the monogram logo and coordinated packaging to personalised thank-you cards, every touchpoint is designed to enhance the unboxing experience, reinforce brand recognition, and build a lasting connection with customers.</p>
+            <h6 class="font">Font: Cormorant Garamond, Poppins</h6>
+            <div class="media zoom mockup"><img src="Image/Packaging/Ruhi Jewels Pink Packaging Showcase (1) 1.png" alt="Ruhi Jewels packaging mockup" loading="lazy"></div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery open">
+      <button class="gallery-head" type="button" aria-expanded="true">OCELLARIS <span class="chev"></span></button>
+      <div class="gallery-body">
+        <div class="brand">
+          <div class="top-row">
+            <div class="panel">
+              <div class="media zoom"><img src="Image/Packaging/Ocellaris.png" alt="Ocellaris logo" loading="lazy"></div>
+              <h5>Logo</h5>
+            </div>
+            <div class="panel">
+              <div class="media reel" data-video="Image/Packaging/OCELLARIS.mp4"><img src="Image/Packaging/3.png" alt="Ocellaris logo reveal" loading="lazy"><span class="play"></span></div>
+              <h5>Logo reveal</h5>
+            </div>
+            <div class="panel">
+              <div class="swatches"><span class="swatch" style="background:#07AFF8" title="#07AFF8"></span><span class="swatch" style="background:#2837B8" title="#2837B8"></span><span class="swatch" style="background:#95E2F6" title="#95E2F6"></span><span class="swatch" style="background:#0F479C" title="#0F479C"></span><span class="swatch" style="background:#012A6C" title="#012A6C"></span><span class="swatch" style="background:#041531" title="#041531"></span></div>
+              <h5>Colors</h5>
+            </div>
+        </div>
+        <div class="detail" style="--cols: 1fr 3.4fr">
+          <div class="d-left"><div class="media zoom free"><img src="Image/Packaging/Ocellaris Premium Underwater Water Label 1.png" alt="Ocellaris bottle label" loading="lazy"></div></div>
+          <div class="text">
+            <h6>Brand Story</h6>
+            <p>The name Ocellaris is inspired by Amphiprion ocellaris, commonly known as the ocellaris clownfish, a vibrant marine species found in tropical waters. This connection to marine life forms the foundation of the brand’s visual identity, bringing together the freshness of water and the colourful beauty of the ocean. Shades of blue, flowing typography, and underwater illustrations translate this inspiration into distinctive packaging that feels refreshing, lively, and memorable.</p>
+            <h6>Brand Type</h6>
+            <p>Packaged Drinking Water | FMCG</p>
+            <h6>Design Approach</h6>
+            <p>Inspired by the ocean’s natural colours and movement, the packaging uses layered blues, aquatic illustrations, and bold typography to create a striking underwater experience. The design balances visual storytelling with clear product information, helping the brand stand out on the shelf.</p>
+            <h6 class="font">Font: Baloo, Poppins</h6>
+            <div class="detail refs" style="--cols: 1fr 2.4fr">
+              <div class="d-left"><div class="media zoom bottle"><img src="Image/Packaging/Ocellaris Premium Water by the Alpine Lake (1) 1.png" alt="Ocellaris bottle mockup" loading="lazy"></div></div>
+              <div>
+                <h6 class="ref-title">References</h6>
+                <div class="ref-row"><div class="media zoom ref"><img src="Image/Packaging/images (43) 1.png" alt="Reference 1" loading="lazy"></div><div class="media zoom ref narrow"><img src="Image/Packaging/istockphoto-1141073101-612x612 1.png" alt="Reference 2" loading="lazy"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery open">
+      <button class="gallery-head" type="button" aria-expanded="true">ZORA <span class="chev"></span></button>
+      <div class="gallery-body">
+        <div class="brand">
+          <div class="top-row">
+            <div class="panel">
+              <div class="media zoom"><img src="Image/Packaging/Zora.png" alt="Zora logo" loading="lazy"></div>
+              <h5>Logo</h5>
+            </div>
+            <div class="panel">
+              <div class="media reel" data-video="Image/Packaging/Zora.mp4"><img src="Image/Packaging/4.png" alt="Zora logo reveal" loading="lazy"><span class="play"></span></div>
+              <h5>Logo reveal</h5>
+            </div>
+            <div class="panel">
+              <div class="swatches"><span class="swatch" style="background:#EFC18F" title="#EFC18F"></span><span class="swatch" style="background:#DEA771" title="#DEA771"></span><span class="swatch" style="background:#C9925C" title="#C9925C"></span><span class="swatch" style="background:#B76E41" title="#B76E41"></span><span class="swatch" style="background:#944000" title="#944000"></span><span class="swatch" style="background:#922E1E" title="#922E1E"></span></div>
+              <h5>Colors</h5>
+            </div>
+        </div>
+        <div class="detail" style="--cols: 1.2fr 1fr">
+          <div class="d-left"><div class="media zoom free"><img src="Image/Packaging/Zora Packaging 1.png" alt="Zora packaging" loading="lazy"></div></div>
+          <div class="text">
+            <h6>Brand Story</h6>
+            <p>ZORA is a restaurant brand built around the love of good food and memorable dining experiences. Its visual identity draws inspiration from the warmth of traditional cooking, the richness of spices, and the earthy tones of natural ingredients. The layered shapes create a sense of depth and movement, while the warm terracotta palette evokes the comfort of freshly prepared food. Ingredient illustrations bring the brand’s culinary character to life, creating an identity that feels warm, distinctive, and inviting.</p>
+            <h6>Brand Type</h6>
+            <p>Restaurant | Food &amp; Beverage | Dining</p>
+            <h6>Design Approach</h6>
+            <p>The design combines earthy colours, organic shapes, and spice-inspired illustrations to reflect the richness of the culinary experience. A palette of warm beige, ochre, burnt orange, and deep red creates a cosy, appetising feel, while the packaging maintains a consistent identity across brand touchpoints.</p>
+            <h6 class="font">Font: Cormorant Garamond, Poppins</h6>
+            <div class="media zoom mockup small"><img src="Image/Packaging/ZORA Biryani Boxes in Rustic Warmth 1.png" alt="Zora packaging mockup" loading="lazy"></div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery open">
+      <button class="gallery-head" type="button" aria-expanded="true">SREE NAKODA JEWELLERS <span class="chev"></span></button>
+      <div class="gallery-body">
+        <div class="brand">
+          <div class="top-row">
+            <div class="panel">
+              <div class="media zoom"><img src="Image/Packaging/Sree Nakoda Jewellers.png" alt="Sree Nakoda Jewellers logo" loading="lazy"></div>
+              <h5>Logo</h5>
+            </div>
+            <div class="panel">
+              <div class="media reel" data-video="Image/Packaging/SREE NAKODA JEWELLERS.mp4"><img src="Image/Packaging/5.png" alt="Sree Nakoda Jewellers logo reveal" loading="lazy"><span class="play"></span></div>
+              <h5>Logo reveal</h5>
+            </div>
+            <div class="text">
+              <h6>Brand Overview</h6>
+              <p>Sree Nakoda Jewellers’ logo combines an elegant monogram with gold detailing, reflecting the richness of traditional gold jewellery. The deep teal and gold palette creates a premium look, while the classic typography conveys trust, elegance, and timeless craftsmanship.</p>
+              <h6>Brand Type</h6>
+              <p>Gold Jewellery | Traditional Jewellery</p>
+            </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery open">
+      <button class="gallery-head" type="button" aria-expanded="true">SILVERWOOD <span class="chev"></span></button>
+      <div class="gallery-body">
+        <div class="brand">
+          <div class="top-row">
+            <div class="panel">
+              <div class="media zoom"><img src="Image/Packaging/Silver Wood.png" alt="Silverwood logo" loading="lazy"></div>
+              <h5>Logo</h5>
+            </div>
+            <div class="panel">
+              <div class="media reel" data-video="Image/Packaging/silverwoodTEASER.mp4"><img src="Image/Packaging/6.png" alt="Silverwood logo reveal" loading="lazy"><span class="play"></span></div>
+              <h5>Logo reveal</h5>
+            </div>
+            <div class="text">
+              <h6>Brand Overview</h6>
+              <p>Silverwood Convention and Retreat is an event and hospitality venue in Hyderabad, offering a setting for weddings, celebrations, and special occasions. The visual identity combines a refined wordmark with a golden emblem, creating an elegant and welcoming brand presence suited to memorable events.</p>
+              <h6>Brand Type</h6>
+              <p>Convention Venue | Wedding &amp; Event Destination | Hospitality &amp; Retreat</p>
+            </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery open">
+      <button class="gallery-head" type="button" aria-expanded="true">URBANE <span class="chev"></span></button>
+      <div class="gallery-body">
+        <div class="brand">
+          <div class="top-row">
+            <div class="panel">
+              <div class="media zoom"><img src="Image/Packaging/Urbane.png" alt="Urbane logo" loading="lazy"></div>
+              <h5>Logo</h5>
+            </div>
+            <div class="panel">
+              <div class="media reel" data-video="Image/Packaging/URBANE.mp4"><img src="Image/Packaging/7.png" alt="Urbane logo reveal" loading="lazy"><span class="play"></span></div>
+              <h5>Logo reveal</h5>
+            </div>
+            <div class="text">
+              <h6>Brand Overview</h6>
+              <p>Urbane is an outdoor furniture and home &amp; garden brand that blends contemporary design with natural elements. The logo features an organic emblem paired with elegant typography, while the fresh green palette reflects nature, comfort, and modern outdoor living. Together, these elements create a clean and sophisticated identity suited to stylish outdoor spaces.</p>
+              <h6>Brand Type</h6>
+              <p>Outdoor Furniture | Home &amp; Garden</p>
+            </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery open">
+      <button class="gallery-head" type="button" aria-expanded="true">BIDRYDE <span class="chev"></span></button>
+      <div class="gallery-body">
+        <div class="brand">
+          <div class="top-row">
+            <div class="panel">
+              <div class="media zoom"><img src="Image/Packaging/Bid ryde.png" alt="Bidryde logo" loading="lazy"></div>
+              <h5>Logo</h5>
+            </div>
+            <div class="panel">
+              <div class="media reel" data-video="Image/Packaging/BIDRYDE.mp4"><img src="Image/Packaging/8.png" alt="Bidryde logo reveal" loading="lazy"><span class="play"></span></div>
+              <h5>Logo reveal</h5>
+            </div>
+            <div class="text">
+              <h6>Brand Overview</h6>
+              <p>Bid rYde is a car rental brand focused on making travel convenient and accessible. The car-inspired logo and bold blue colour palette communicate mobility, reliability, and trust, creating a modern identity suited to a seamless rental experience.</p>
+              <h6>Brand Type</h6>
+              <p>Car Rental | Mobility Services | Transportation</p>
+            </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery open">
+      <button class="gallery-head" type="button" aria-expanded="true">AMIT FITNESS <span class="chev"></span></button>
+      <div class="gallery-body">
+        <div class="brand">
+          <div class="top-row">
+            <div class="panel">
+              <div class="media zoom"><img src="Image/Packaging/Amit Fitness Diary.png" alt="Amit Fitness logo" loading="lazy"></div>
+              <h5>Logo</h5>
+            </div>
+            <div class="panel">
+              <div class="media reel" data-video="Image/Packaging/AmitFitness.mp4"><img src="Image/Packaging/9.png" alt="Amit Fitness logo reveal" loading="lazy"><span class="play"></span></div>
+              <h5>Logo reveal</h5>
+            </div>
+            <div class="text">
+              <h6>Brand Overview</h6>
+              <p>Amit Fitness Diary is a fitness brand focused on promoting health, strength, and an active lifestyle. The bold typography and dynamic green symbol convey energy, movement, and progress, creating a distinctive identity that reflects the brand’s fitness-focused approach.</p>
+              <h6>Brand Type</h6>
+              <p>Fitness | Health &amp; Wellness | Active Lifestyle</p>
+            </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery open">
+      <button class="gallery-head" type="button" aria-expanded="true">BULL MANTRA <span class="chev"></span></button>
+      <div class="gallery-body">
+        <div class="brand">
+          <div class="top-row">
+            <div class="panel">
+              <div class="media zoom"><img src="Image/Packaging/Bull Mantra.png" alt="Bull Mantra logo" loading="lazy"></div>
+              <h5>Logo</h5>
+            </div>
+            <div class="panel">
+              <div class="media reel" data-video="Image/Packaging/Bull Mantra.mp4"><img src="Image/Packaging/10.png" alt="Bull Mantra logo reveal" loading="lazy"><span class="play"></span></div>
+              <h5>Logo reveal</h5>
+            </div>
+            <div class="text">
+              <h6>Brand Overview</h6>
+              <p>Bull Mantra is a trading education brand focused on helping individuals understand financial markets and develop trading knowledge. The bold bull emblem symbolises strength, confidence, and market momentum, while the red, black, and white palette creates a strong and authoritative brand identity.</p>
+              <h6>Brand Type</h6>
+              <p>Trading Education | Stock Market Learning</p>
+            </div>
+        </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <div class="copy">© 2026 By Mariyam Nesha</div>
+    <a href="index.html" class="f-logo"><img src="Image/Common/Logo.png" alt="MN logo"></a>
+    <div class="social">
+      <span>Follow :</span>
+      <a href="https://www.behance.net/mariyamnesha3" target="_blank" rel="noopener" aria-label="Behance"><img src="Image/Common/Behance.png" alt="Behance"></a>
+      <a href="https://dribbble.com/mary333333333" target="_blank" rel="noopener" aria-label="Dribbble"><img src="Image/Common/Dribbble.png" alt="Dribbble"></a>
+      <a href="mailto:mariyamnesha3@gmail.com" aria-label="Gmail"><img src="Image/Common/Gmail.png" alt="Gmail"></a>
+      <a href="https://www.linkedin.com/in/mariyam-nesha-05b04a190/" target="_blank" rel="noopener" aria-label="LinkedIn"><img src="Image/Common/LinkedIn.png" alt="LinkedIn"></a>
+    </div>
+  </footer>
+
+  <!-- ===== Lightbox (click an image to enlarge; logo reveals play) ===== -->
+  <div class="lightbox" id="lightbox">
+    <button class="close" type="button" aria-label="Close">&times;</button>
+    <div class="lb-content"></div>
+  </div>
+
+  <script>
+    // Collapse / expand each brand section
+    function fit() {
+      document.querySelectorAll('.gallery-body').forEach(function (b) { b.style.maxHeight = b.scrollHeight + 'px'; });
+    }
+    document.querySelectorAll('.gallery').forEach(function (g) {
+      var head = g.querySelector('.gallery-head');
+      head.addEventListener('click', function () {
+        fit();
+        var open = g.classList.toggle('open');
+        head.setAttribute('aria-expanded', open);
+      });
+    });
+    fit();
+    window.addEventListener('load', fit);
+    window.addEventListener('resize', fit);
+    document.querySelectorAll('img').forEach(function (i) { i.addEventListener('load', fit); });
+
+    // Logo reveal thumbnails: if no thumbnail image is set, show the video's first frame
+    document.querySelectorAll('.media.reel').forEach(function (reel) {
+      var src = reel.getAttribute('data-video');
+      var img = reel.querySelector('img');
+      if (src && img && !img.getAttribute('src')) {
+        var v = document.createElement('video');
+        v.src = src + '#t=0.1';
+        v.muted = true;
+        v.playsInline = true;
+        v.preload = 'metadata';
+        v.setAttribute('aria-label', img.alt);
+        img.replaceWith(v);
+      }
+    });
+
+    // Lightbox: images open large, logo reveals play their video
+    var lb = document.getElementById('lightbox');
+    var content = lb.querySelector('.lb-content');
+    document.querySelectorAll('.media').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var video = el.getAttribute('data-video');
+        var img = el.querySelector('img');
+        var imgSrc = img && img.getAttribute('src');
+        if (!video && !imgSrc) return;          // nothing added yet
+
+        content.innerHTML = '';
+        if (video) {
+          var v = document.createElement('video');
+          v.src = video;
+          v.controls = true;
+          v.autoplay = true;
+          v.playsInline = true;
+          content.appendChild(v);
+        } else {
+          var big = document.createElement('img');
+          big.src = img.src;
+          big.alt = img.alt;
+          content.appendChild(big);
+        }
+        lb.classList.add('show');
+      });
+    });
+    function closeLb() { lb.classList.remove('show'); content.innerHTML = ''; }
+    lb.addEventListener('click', function (e) { if (e.target === lb || e.target.classList.contains('close')) closeLb(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLb(); });
+  </script>
+</body>
+</html>
